@@ -50,11 +50,12 @@ function trim(string) {
 // the goal of this problem is to reverse engineer what array methods are actually doing and create an object that has those methods
 
 function createArray() {
-  this.array = [];
+  this.array = { };
   this.index = 0;
 }
 createArray.prototype.push = function (val) {
-  this.array[this.index++] = val;
+  this.array[this.index] = val;
+  this.index++;
   return this;
 };
 createArray.prototype.pop = function () {
@@ -63,18 +64,17 @@ createArray.prototype.pop = function () {
   return value;
 };
 createArray.prototype.unshift = function (val) {
-  const indexx = this.array.length;
-  for (let i = 0; i <= this.array.length; i++) {
-    this.array[indexx + 1 - i] = this.array[indexx - i];
+  for (let i = this.index - 1; i >= 0; i--) {
+    this.array[i + 1] = this.array[i];
   }
+  this.index++;
   this.array[0] = val;
 };
-createArray.prototype.shift = function (val) {
-  const indexx = this.array.length;
-  val = this.array[0];
-  for (let i = 0; i < this.array.length; i++) {
+createArray.prototype.shift = function () {
+  const val = this.array[0];
+  for (let i = 0; i < this.index; i++) {
     this.array[i] = this.array[i + 1];
   }
+  this.index--;
   return val;
 };
-createArray.prototype;
