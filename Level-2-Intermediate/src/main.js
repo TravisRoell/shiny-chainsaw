@@ -7,6 +7,7 @@ function returnOdds(array) {
 			array.splice(i--,1)
 		}
 	}
+	return array;
 }
 
 
@@ -19,14 +20,14 @@ function returnEvens(array) {
 			array.splice(i--,1)
 		}
 	}
+	return array;
 }
 
 
 // returns only the max element from the inputted array of numbers
 // ex: findMax([1,25,6,3]); -> 25
 function findMax(array) {
-	array.sort(function(a, b){return a - b});
-	array.splice(0, array.length - 1);
+	return Math.max.apply(null, array);
 }
 
 /**
@@ -45,9 +46,11 @@ function trim(string) {
   // unshift(val) adds val to the beginning
   // shift() removes a value from the beginning and returns it
 // the goal of this problem is to reverse engineer what array methods are actually doing and create an object that has those methods
+/*
 function createArray() {
-	this.array [];
+	this.array = [];
 	this.index = 0;
+}
 	createArray.prototype.push = function(val) {
 		this.array[ this.index++ ] = val;
 		return this;
@@ -72,4 +75,4 @@ function createArray() {
 			}
 		return val;
 	}
-}
+	*/
