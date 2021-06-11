@@ -2,12 +2,13 @@
 // and returns an array of only the odd numbers
 // ex: returnOdds([1,2,3,4,5,6,7]); -> [1,3,5,7]
 function returnOdds(array) {
-  for (i = 0; i < array.length; i++) {
-    if (array[i] % 2 === 0) {
-      array.splice(i--, 1);
+  const result = [];
+  for(let i = 0; i < array.length; i++){
+    if (array[i] % 2 === 1) {
+      result.push(array[i]);
     }
   }
-  return array;
+  return result;
 }
 
 
@@ -15,9 +16,10 @@ function returnOdds(array) {
 // and returns an array of only the even numbers
 // ex: returnEvent([1,2,3,4,5,6,7]); -> [2,4,6]
 function returnEvens(array) {
-  for (i = 0; i < array.length; i++) {
-    if (array[i] % 2 === 1) {
-      array.splice(i--, 1);
+  const result = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] % 2 === 0) {
+      result.push(array[i]);
     }
   }
   return array;
