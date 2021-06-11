@@ -2,12 +2,13 @@
 // and returns an array of only the odd numbers
 // ex: returnOdds([1,2,3,4,5,6,7]); -> [1,3,5,7]
 function returnOdds(array) {
+	const result = [];
 	for(i = 0; i < array.length; i++){
-		if (array[i] % 2 === 0) {
-			array.splice(i--,1)
+		if (array[i] % 2 === 1) {
+			result.push(array[i]);
 		}
 	}
-	return array;
+	return result;
 }
 
 
@@ -16,7 +17,7 @@ function returnOdds(array) {
 // ex: returnEvent([1,2,3,4,5,6,7]); -> [2,4,6]
 function returnEvens(array) {
 	for(i = 0; i < array.length; i++){
-		if (array[i] % 2 === 1) {
+		if (array[i] % 2 === 0) {
 			array.splice(i--,1)
 		}
 	}
@@ -46,7 +47,7 @@ function trim(string) {
   // unshift(val) adds val to the beginning
   // shift() removes a value from the beginning and returns it
 // the goal of this problem is to reverse engineer what array methods are actually doing and create an object that has those methods
-/*
+
 function createArray() {
 	this.array = [];
 	this.index = 0;
@@ -69,10 +70,9 @@ function createArray() {
 	}
 	CreateArray.prototype.shift = function(val) {
 		let indexx = this.array.length;
-		let val = this.array[0];
+		val = this.array[0];
 			for(i=0; i < this.array.length; i++){
 				this.array[i]= this.array[i+1];
 			}
 		return val;
 	}
-	*/
