@@ -22,7 +22,7 @@ function returnEvens(array) {
       result.push(array[i]);
     }
   }
-  return array;
+  return result;
 }
 
 
