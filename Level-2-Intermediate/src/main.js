@@ -2,8 +2,11 @@
 // and returns an array of only the odd numbers
 // ex: returnOdds([1,2,3,4,5,6,7]); -> [1,3,5,7]
 function returnOdds(array) {
-  // CODE HERE
-
+	for(i = 0; i < array.length; i++){
+		if (array[i] % 2 === 0) {
+			array.splice(i--,1)
+		}
+	}
 }
 
 
@@ -11,16 +14,19 @@ function returnOdds(array) {
 // and returns an array of only the even numbers
 // ex: returnEvent([1,2,3,4,5,6,7]); -> [2,4,6]
 function returnEvens(array) {
-  // CODE HERE
-
+	for(i = 0; i < array.length; i++){
+		if (array[i] % 2 === 1) {
+			array.splice(i--,1)
+		}
+	}
 }
 
 
 // returns only the max element from the inputted array of numbers
 // ex: findMax([1,25,6,3]); -> 25
 function findMax(array) {
-  // CODE HERE
-
+	array.sort(function(a, b){return a - b});
+	array.splice(0, array.length - 1);
 }
 
 /**
@@ -28,7 +34,7 @@ function findMax(array) {
  * trim(' hello '); -> 'hello'
  */
 function trim(string) {
-  // CODE HERE
+	return string.trim();
 }
 
 // under the hood, a JavaScript array is a specific type of object in which values are paired with sequentially numbered keys.
@@ -40,6 +46,30 @@ function trim(string) {
   // shift() removes a value from the beginning and returns it
 // the goal of this problem is to reverse engineer what array methods are actually doing and create an object that has those methods
 function createArray() {
-  // CODE HERE
-
+	this.array [];
+	this.index = 0;
+	createArray.prototype.push = function(val) {
+		this.array[ this.index++ ] = val;
+		return this;
+	}
+	createArray.prototype.pop = function() {
+		const value = this.array[this.array.length - 1];
+		this.array = this.array.length -1;
+		return value;
+	}
+	CreateArray.prototype.unshift = function(val) {
+		let indexx = this.array.length;
+			for(i=0; i <= this.array.length; i++){
+				this.array[indexx+1-i]= this.array[indexx-i];
+			}
+		this.array[0] = val;
+	}
+	CreateArray.prototype.shift = function(val) {
+		let indexx = this.array.length;
+		let val = this.array[0];
+			for(i=0; i < this.array.length; i++){
+				this.array[i]= this.array[i+1];
+			}
+		return val;
+	}
 }
