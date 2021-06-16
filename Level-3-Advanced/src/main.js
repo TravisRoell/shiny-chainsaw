@@ -5,29 +5,57 @@
 // forEach(['a','b','c'], callback); → prints a,0,['a','b','c'] b,1,['a','b','c'] c,2,['a','b','c']
 // For each element in the array, the callback we passed is called. The callback can be customized, but in the above example, the callback prints out the element, index, and entire array.
 function forEach(array, callback) {
-  // CODE HERE
+  for (let i = 0; i < array.length; i++) {
+    callback(array[i], i, array);
+  }
 }
 
+function divideByTwo(a) {
+  return a / 2;
+}
+const divideByTwoo = function (a) {
+  return a / 2;
+};
+const divideByTwooo = (a) => {
+  return a / 2;
+};
+
+const divideByTwoooo = (a) => a / 2;
 // Creates an array of values by running each element in collection through callback
 // Should we explain that map returns?
 // Callback (element/value, index/key, array)
-// map([1,2,3], function(element, index, array) {
-//  return element * 3;
-// }); -> [3,6,9]
+// const timeThree = function(element, index, array) {
+//   return element * 3;
+//   }
+// map(arr, timeThree);
 // BONUS: use the forEach method you use to create map
 function map(array, callback) {
-  // CODE HERE
+  const arr = [];
+  forEach(array, (element, index, array) => {
+    arr[index] = callback(element);
+  });
+  return arr;
 }
 
+
 // Iterates over elements of collection, returning an Array of all elements callback returns truthy for.
-// filter([1,2,3,4], function(element, index, collection) {
-//  return element % 2 === 0;
-// }); → [2,4]
+// let arr = [1, 2, 3, 4];
+// const isEven = function (element, index, collection) {
+//   return element % 2 === 0;
+// };
+// filter([1, 2, 3, 4], (e) => e % 2 === 0);
+
 // filter({a: 1, b: 2,c: 3,d: 4}, function(element, index, collection) {
 //  return element % 2 !== 0;
 // }); → [1,3]
 function filter(collection, callback) {
-  // CODE HERE
+  const solution = [];
+  for (let i = 0; i < collection.length; i++){
+    if (callback(collection[i])) {
+      solution.push(collection[i]);
+    }
+  }
+  return solution;
 }
 
 // Removes all elements from array that callback returns truthy for and returning a collection of elements that did not pass the truthy test.
@@ -40,15 +68,38 @@ function filter(collection, callback) {
 // }); → {b:2, d:4}
 // Challenge: use filter
 function reject(collection, callback) {
-  // CODE HERE
+  if (Array.isArray(collection)) {
+    const solution = [];
+    for (let i = 0; i < collection.length; i++){
+      const element = collection[i];
+      if (!callback(element)) {
+        solution.push(element);
+      }
+    }
+    return solution;
+  }
+  const solution = {};
+  for (const property in collection) {
+    const element = collection[property];
+    if (!callback(element)) {
+      solution[property] = element;
+    }
+  }
+  return solution;
 }
 
 // Creates an array without duplicate values from the inputted array.
 // The order of the array is preserved.
 // uniq([1,2,1]); → [1,2]
+//unique.indexOf searches for the position of array[i]'s element in itself, returns -1 if fail. && Sanity check that the element isnt blank?
 function uniq(array) {
-  // CODE HERE
-
+  const unique = [];
+  for (let i = 0; i < array.length; i++) {
+    if (unique.indexOf(array[i]) === -1 && array[i] !== '') {
+      unique.push(array[i]);
+    }
+  }
+  return unique;
 }
 
 // Gets the index at which the first occurrence of value is found in array
@@ -57,7 +108,12 @@ function uniq(array) {
 // indexOf([11,22,33], 11); → 0
 // indexOf([11,22,33], 5); → -1
 function indexOf(array, value) {
-  // CODE HERE
+  for (let i = 0; i < array.length; i++){
+    if (array[i] === value) {
+      return i;
+    }
+  }
+  return -1;
 
 }
 
@@ -65,8 +121,10 @@ function indexOf(array, value) {
 // Returns a function that is restricted to invoking func once.
 // Repeat calls to the function return the value of the first call.
 function once(func) {
-  // CODE HERE
-
+  return function () {
+    func && func.apply(this, arguments);
+    func = null;
+  };
 }
 
 // Reduces collection to a value which is the accumulated result of running each element in collection through iteratee, where each successive invocation is supplied the return value of the previous. If accumulator is not provided the first element of collection is used as the initial value.
@@ -78,8 +136,16 @@ function once(func) {
 //  return stored + current;
 // },1); → 4
 function reduce(array, callback, start) {
-  // CODE HERE
+  const indexElement = start ? 0 : 1; // If start is supplied then start index at 0, otherwise if not supplied start with the first element arr[1] (?)
+  let element = start === undefined ? array[0] : start; //Check if start is not supplied - undefined then start with the zero(?) index in the collection. If it is supplied start with that element.
+  //1 hour of banging my head over start ? 0 : 1; then I realized we start on second iterations, because first iteration is because element is being assigned to first value...
+  for (let i = indexElement; i < array.length; i++){
+    element = callback(element, array[i]);
+  }
+  return element;
 }
+
+//last 2 est 1.5hr
 
 // Takes an array and a function as arguments.
 // Returns true if the function produces true when each array element is passed to it.
@@ -92,8 +158,7 @@ function reduce(array, callback, start) {
 // });  -> false
 // BONUS: use reduce in your answer
 function every(array, func) {
-  // CODE HERE
-
+  
 }
 
 // Flattens a nested array.
