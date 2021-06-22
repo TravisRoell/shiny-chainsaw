@@ -136,12 +136,27 @@ function once(func) {
 //  return stored + current;
 // },1); → 4
 function reduce(array, callback, start) {
-  const indexElement = start ? 0 : 1; // If start is supplied then start index at 0, otherwise if not supplied start with the first element arr[1] (?)
-  let element = start === undefined ? array[0] : start; //Check if start is not supplied - undefined then start with the zero(?) index in the collection. If it is supplied start with that element.
+  let indexElement = 0;
+  if (start || start === 0) {
+    indexElement = 0;
+  }
+  else {
+    indexElement = 1;
+  }// If start is supplied then start index at 0, otherwise if not supplied start with the first element arr[1] (?)
+  let element = 1;
+  if (start === undefined) {
+    element = array[0];
+  }
+  else {
+    element = start;
+  } //Check if start is not supplied - undefined then start with the zero(?) index in the collection. If it is supplied start with that element.
   //1 hour of banging my head over start ? 0 : 1; then I realized we start on second iterations, because first iteration is because element is being assigned to first value...
   for (let i = indexElement; i < array.length; i++){
+//    console.log(element);
     element = callback(element, array[i]);
+//    console.log("stored: " + element + "current: " + array[i]);
   }
+  console.log("End");
   return element;
 }
 
@@ -158,17 +173,44 @@ function reduce(array, callback, start) {
 // });  -> false
 // BONUS: use reduce in your answer
 function every(array, func) {
-  
+  return reduce(array, (stored, current) => {
+    if (stored === false) return false;
+    return func(current);
+  }, 0);
 }
+
+/*
+function map(array, callback) {
+  const arr = [];
+  forEach(array, (element, index, array) => {                                                 forEach(array, callback)
+    arr[index] = callback(element);
+  });
+  return arr;
+}
+*/
 
 // Flattens a nested array.
 // flatten([1, [2, 3, [4]]]); → [1, 2, 3, [4]]
 function flatten(array) {
-  // CODE HERE
+  return array.concat.apply([],array);
 }
-
 // Recursively flattens a nested array.
 // flattenDeep([1, [2, 3, [4]]]); → [1, 2, 3, 4]
 function flattenDeep(array) {
-  // CODE HERE
+  const arr = [];
+  const arrFlatten = (array) => {
+    let counter = 0;
+    while (counter < array.length) {
+      const val = array[counter];
+      if (Array.isArray(val)) {
+        arrFlatten(val);
+      }
+      else {
+        arr.push(val);
+      }
+      counter++;
+    }
+  };
+  arrFlatten(array);
+  return arr;
 }
